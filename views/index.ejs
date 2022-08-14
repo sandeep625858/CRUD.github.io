@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+    <link rel="stylesheet" href= "style.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="/api/users" id="add_user">
+          <div class="form-group">
+            <label for="name" class="text-light">Name:-</label>
+            <input type="text" name="name" value="" placeholder="Enter name here">
+          <button type="submit" class="btn text-dark">Submit</button>
+        </form>
+        <span class="text-gradient"></span>
+    </div>
+    <div class="display">
+        <form action="/" method="POST">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0;i<users.length;i++) {%>
+                    <tr>
+                        <td><%= i+1%></td>
+                        <td><%= users[i].name%></td>
+                        <td>
+                            <a href="/update/<%= users[i]._id%>" class="btn border-shadow update">
+                                <span class="edit"><i class="fa-solid fa-pen-to-square"></i></span>
+                            </a>
+                            <a class="btn border-shadow delete" data-id="<%= users[i]._id%>">
+                                <span class="delete"><i class="fa-solid fa-trash"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f75dc8e629.js" crossorigin="anonymous"></script>
+        
+    <script>
+        $('#add_user').submit(function(event){
+        alert('data inserted successfully')
+    })
+    if(location.pathname=='/'){
+        $ondelete=$(".table tbody td a.delete");
+        $ondelete.click(function(){
+            var id=$(this).attr("data-id")
+            var request={
+            "url" : `http://localhost:8000/api/users/${id}`,
+            "method":"DELETE",
+            }
+            if(confirm("Do you want to delete")){
+                $.ajax(request).done(function(response){
+                    alert("Data Deleted successfully!");
+                    location.reload();
+                })
+            }
+        })
+    }
+    </script>
+</body>
+</html>

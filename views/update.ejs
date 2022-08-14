@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            .form-group input{
+            width:30%;
+            padding: .6em 1em;
+            margin: .5em 0;
+            border: 1px solid red;
+            }
+            .form-group label{
+            color: blueviolet;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" id="update_user">
+          <div class="form-group">
+            <label for="name" class="text-light">Name:-</label>
+            <input type="text" name="name" value="<%= user.name%>" placeholder="Enter name here">
+          <button type="submit" class="btn text-dark">Submit</button>
+        </form>
+        <span class="text-gradient"></span>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</body>
+</html>
